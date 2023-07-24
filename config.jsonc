@@ -1,0 +1,6 @@
+{
+  "connectionString": "YOUR_CONNECTION_STRING_HERE",
+  "database": "YOUR_DATABASE_HERE",
+  "collection": "YOUR_COLLECTION_HERE", // Your collection, will also be the name of the csv file (e.g. users.csv)
+  "directory": "./spreadsheets" // The directory to save the spreadsheets to
+}
