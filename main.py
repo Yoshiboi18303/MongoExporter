@@ -15,17 +15,23 @@ def getJson():
 
 def main():
     jsonContent = getJson()
-    client = MongoClient(jsonContent.connectionString)
-    db = client.get_database(jsonContent.database)
-    collection = db.get_collection(jsonContent.collection)
+
+    connectionString = jsonContent["connectionString"]
+    database = jsonContent["database"]
+    collectionName = jsonContent["collection"]
+    directory = jsonContent["directory"]
+
+    client = MongoClient(connectionString)
+    db = client.get_database(database)
+    collection = db.get_collection(collectionName)
 
     df = pd.DataFrame(collection.find())
 
-    if not exists(jsonContent.directory):
+    if not exists(directory):
         print("Directory does not exist, creating...")
-        mkdir(jsonContent.directory)
+        mkdir(directory)
 
-    df.to_csv(f"{jsonContent.directory}/{jsonContent.collection}.csv")
+    df.to_csv(f"{directory}/{collectionName}.csv")
 
     client.close()
 
